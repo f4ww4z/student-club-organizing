@@ -1,0 +1,16 @@
+.margin-navbar {
+    margin-bottom: 52px;
+}
+
+.home-wide-display {
+    height: 92vh;
+    background-image: url("assets/img/background_home.png");
+}
+
+.home-wide-display h1 {
+    font-size: calc(50px + 3vw);
+}
+
+.home-wide-display h3 {
+    font-size: calc(24px + 1vw);
+}
