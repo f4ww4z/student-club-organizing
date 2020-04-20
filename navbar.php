@@ -5,7 +5,6 @@
 
   <ul class="app-bar-menu ml-auto">
     <li><a href="#">Login</a></li>
-    <li><a href="#">Sign Up</a></li>
+    <li><a href="auth/register.php">Sign Up</a></li>
   </ul>
 </div>
-<div class="margin-navbar"></div>

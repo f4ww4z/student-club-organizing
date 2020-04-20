@@ -9,5 +9,8 @@
   <link rel="stylesheet" href="main.css">
   <title><?= "$pageTitle | Student Club Organizer" ?></title>
 </head>
-<body>
+<body class="<?= isset($bodyClass) ? $bodyClass : '' ?>">
+<?php
+session_start()
+?>
 
