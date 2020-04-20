@@ -36,13 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = 'Username already exists';
     } else {
         // all good, insert into db
-        $user = new User($post_username, $post_full_name, $post_email, $post_password, $post_contact_number, $post_address, $post_type_of_user);
+        $user = new User(0, $post_username, $post_full_name, $post_email, $post_password, $post_contact_number, $post_address, $post_type_of_user);
         $conn = get_connection();
 
         $is_success = add_user($user);
         if ($is_success) {
             $message = 'Successfully registered user!';
-            //TODO: take user to dashboard
+            $_SESSION['username'] = $post_username;
+            header("Location: /user/dashboard.php");
         } else {
             $message = 'Cannot add user at the moment. Please try again.';
         }
@@ -51,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <div class="container-fluid d-flex flex-justify-center">
-  <div class="p-5 mt-20 bg-light w-100 w-50-md">
+  <div class="p-5 mt-20 mb-20 bg-light w-100 w-50-md">
     <h2>Register</h2>
     <form action="register.php" method="post">
       <h5 class="fg-red"><?= $message ?></h5>

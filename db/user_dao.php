@@ -41,4 +41,15 @@ function does_username_exist($username): bool
     return $res_data['row_count'] > 0;
 }
 
+function does_user_exist($username, $password): bool
+{
+    $conn = get_connection();
 
+    $stmt = $conn->prepare("SELECT EXISTS(SELECT username, password FROM user WHERE username = ? AND password = ?) AS row_exist");
+    $stmt->bind_param("ss", $username, $password);
+
+    $stmt->execute();
+    $res_data = $stmt->get_result()->fetch_assoc();
+
+    return $res_data['row_exist'];
+}

@@ -3,6 +3,7 @@
 
 class User
 {
+    private $id;
     private $username;
     private $full_name;
     private $email;
@@ -15,6 +16,7 @@ class User
 
     /**
      * User constructor.
+     * @param $id
      * @param $username
      * @param $full_name
      * @param $email
@@ -23,8 +25,9 @@ class User
      * @param $address
      * @param $type_of_user
      */
-    public function __construct($username, $full_name, $email, $password, $contact_number, $address, $type_of_user)
+    public function __construct($id, $username, $full_name, $email, $password, $contact_number, $address, $type_of_user)
     {
+        $this->id = $id;
         $this->username = $username;
         $this->full_name = $full_name;
         $this->email = $email;
@@ -32,6 +35,22 @@ class User
         $this->contact_number = $contact_number;
         $this->address = $address;
         $this->type_of_user = $type_of_user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 
     /**
