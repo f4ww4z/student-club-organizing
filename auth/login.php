@@ -4,7 +4,7 @@ $bodyClass = 'bg-lightIndigo';
 include "../header.php";
 include "../navbar.php";
 require_once "../db/mysql.php";
-require_once "../db/user_dao.php";
+require_once "../db/dao_user.php";
 require_once "../model/user.php";
 
 $message = '';

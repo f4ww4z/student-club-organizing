@@ -4,7 +4,7 @@ $bodyClass = 'bg-lightIndigo';
 include "../header.php";
 include "../navbar.php";
 require_once "../db/mysql.php";
-require_once "../db/user_dao.php";
+require_once "../db/dao_user.php";
 require_once "../model/user.php";
 
 $message = '';
@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $post_password = $_POST['password'];
     $post_contact_number = $_POST['contact_number'];
     $post_address = $_POST['address'];
-    $post_type_of_user = $_POST['type_of_user'];
     $post_confirm_password = $_POST['confirm_password'];
 
     if (empty($post_username) or
@@ -26,8 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         empty($post_password) or
         empty($post_confirm_password) or
         empty($post_contact_number) or
-        empty($post_address) or
-        $post_type_of_user < 0 or $post_type_of_user > 2
+        empty($post_address)
     ) {
         $message = 'Some fields are empty!';
     } elseif ($post_password !== $post_confirm_password) {
@@ -36,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = 'Username already exists';
     } else {
         // all good, insert into db
-        $user = new User(0, $post_username, $post_full_name, $post_email, $post_password, $post_contact_number, $post_address, $post_type_of_user);
+        $user = new User(0, $post_username, $post_full_name, $post_email, $post_password, $post_contact_number, $post_address);
         $conn = get_connection();
 
         $is_success = add_user($user);
@@ -80,14 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="form-group">
         <label>Address</label>
         <input name="address" type="text" data-role="input" placeholder="Enter address"/>
-      </div>
-      <div class="form-group">
-        <label>I am a...</label>
-        <select name="type_of_user">
-          <option value="0">Participant</option>
-          <option value="1">Club Member</option>
-          <option value="2">Sponsor</option>
-        </select>
       </div>
       <div class="form-group mt-10">
         <button class="button success">Register</button>

@@ -10,9 +10,6 @@ class User
     private $password;
     private $contact_number;
     private $address;
-    // type of user
-    // 0: participant; 1: member; 2: sponsor
-    private $type_of_user;
 
     /**
      * User constructor.
@@ -23,9 +20,8 @@ class User
      * @param $password
      * @param $contact_number
      * @param $address
-     * @param $type_of_user
      */
-    public function __construct($id, $username, $full_name, $email, $password, $contact_number, $address, $type_of_user)
+    public function __construct($id, $username, $full_name, $email, $password, $contact_number, $address)
     {
         $this->id = $id;
         $this->username = $username;
@@ -34,7 +30,6 @@ class User
         $this->password = $password;
         $this->contact_number = $contact_number;
         $this->address = $address;
-        $this->type_of_user = $type_of_user;
     }
 
     /**
@@ -147,21 +142,5 @@ class User
     public function setAddress($address): void
     {
         $this->address = $address;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTypeOfUser()
-    {
-        return $this->type_of_user;
-    }
-
-    /**
-     * @param mixed $type_of_user
-     */
-    public function setTypeOfUser($type_of_user): void
-    {
-        $this->type_of_user = $type_of_user;
     }
 }
