@@ -10,3 +10,17 @@
 .home-wide-display h3 {
     font-size: calc(24px + 1vw);
 }
+
+.club-tile {
+    width: 200px;
+    background-color: #eae6ff;
+}
+
+.club-tile:hover {
+    background-color: #d2beff;
+}
+
+.tile {
+    border-radius: 14px;
+    filter: drop-shadow(2px 2px 3px #a7a7a7);
+}
