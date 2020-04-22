@@ -19,5 +19,16 @@ $clubs = get_clubs_joined($username);
         </a>
       <?php endforeach; ?>
   </div>
+
+  <div class="d-flex flex-justify-between w-100 mt-4">
+    <a class="button fg-white bg-indigo text-bold"
+       href="/club/create_club.php">
+      TODO
+    </a>
+    <a class="button fg-white bg-lightIndigo bg-indigo-hover text-bold"
+       href="/club/create_club.php">
+      Create New Club
+    </a>
+  </div>
 </div>
 <?php include "../footer.php"; ?>

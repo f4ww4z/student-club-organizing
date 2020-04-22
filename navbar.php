@@ -26,7 +26,7 @@ if ($is_authenticated) {
       <?php endif; ?>
   </ul>
 </div>
-<!-- Side nav -->
+<!-- Bottom nav -->
 <?php if ($is_authenticated): ?>
   <div class="bottom-nav pos-fixed">
     <button class="button">
@@ -39,6 +39,12 @@ if ($is_authenticated) {
       <a class="no-decor fg-black fg-indigo-hover" href="/club/club_view.php">
         <span class="icon mif-event-available"></span>
         <span class="label">Events</span>
+      </a>
+    </button>
+    <button class="button">
+      <a class="no-decor fg-black fg-indigo-hover" href="/user/dashboard.php">
+        <span class="icon mif-dashboard"></span>
+        <span class="label">Dashboard</span>
       </a>
     </button>
     <button class="button">

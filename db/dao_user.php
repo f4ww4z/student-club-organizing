@@ -51,3 +51,38 @@ function does_user_exist($username, $password): bool
 
     return $res_data['row_exist'];
 }
+
+function get_all_user_id_and_full_names(): array
+{
+    $conn = get_connection();
+
+    $result = mysqli_query($conn, "SELECT id, full_name FROM user");
+
+    $users = array();
+
+    while ($row = $result->fetch_assoc()) {
+        $users[$row['id']] = $row['full_name'];
+    }
+
+    return $users;
+}
+
+function get_user_id_from_username($username): int
+{
+    $conn = get_connection();
+
+    $stmt = $conn->prepare("SELECT id FROM user WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $is_success = $stmt->execute();
+    if (!$is_success) {
+        return 0;
+    }
+
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        return $row['id'];
+    } else {
+        return 0;
+    }
+}
