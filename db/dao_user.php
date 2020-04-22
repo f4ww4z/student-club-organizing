@@ -1,6 +1,6 @@
 <?php
 require_once "mysql.php";
-include "../model/user.php";
+include_once "../model/user.php";
 
 function add_user(User $user): bool
 {
