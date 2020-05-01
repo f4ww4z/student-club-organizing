@@ -136,3 +136,47 @@ function get_all_clubs(): array
 
     return $clubs;
 }
+
+function can_edit_club(int $user_id, int $club_id): bool
+{
+    $can_edit = false;
+
+    $conn = get_connection();
+    $stmt = $conn->prepare("SELECT can_edit FROM club_members WHERE user_id = ? AND club_id = ?");
+    $stmt->bind_param("ii", $user_id, $club_id);
+    $is_success = $stmt->execute();
+
+    if (!$is_success) {
+        return $can_edit;
+    }
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $can_edit = (bool)$row['can_edit'];
+    }
+
+    return $can_edit;
+}
+
+function update_club(Club $club): int
+{
+    $club_id = $club->getId();
+    $club_name = $club->getName();
+    $publish_year = $club->getPublishYear();
+    $president_id = $club->getPresidentId();
+
+    $conn = get_connection();
+    $stmt = $conn->prepare("UPDATE club SET name = ?, publish_year = ?, president_id = ?
+                            WHERE id = ?");
+    $stmt->bind_param("siii",
+        $club_name,
+        $publish_year,
+        $president_id,
+        $club_id);
+
+    $is_success = $stmt->execute();
+    if (!$is_success) {
+        return -1;
+    }
+
+    return mysqli_affected_rows($conn);
+}

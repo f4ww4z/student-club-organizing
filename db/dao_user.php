@@ -86,3 +86,29 @@ function get_user_id_from_username($username): int
         return 0;
     }
 }
+
+function get_user(int $user_id): User
+{
+    $user = new User($user_id, "", "", "", "", "", "");
+    $conn = get_connection();
+
+    $stmt = $conn->prepare("SELECT username, full_name, email, password, contact_number, address FROM user WHERE id = ?");
+    $stmt->bind_param("i", $user_id);
+
+    $is_success = $stmt->execute();
+    if (!$is_success) {
+        return $user;
+    }
+
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $user->setUsername($row['username']);
+        $user->setFullName($row['full_name']);
+        $user->setEmail($row['email']);
+        $user->setPassword($row['password']);
+        $user->setContactNumber($row['contact_number']);
+        $user->setAddress($row['address']);
+    }
+
+    return $user;
+}

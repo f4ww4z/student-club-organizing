@@ -21,7 +21,7 @@ $all_clubs = get_all_clubs();
 
   <div class="d-flex flex-wrap flex-justify-center w-100 bg-light">
       <?php foreach ($clubs_joined as $club): ?>
-        <a href="club_view.php"
+        <a href="club_detail.php?id=<?= $club->getId() ?>"
            class="d-flex flex-justify-center flex-align-center p-2 m-3 no-decor fg-black tile club-tile">
           <h4 class="text-bold text-center"><?= $club->getName() ?></h4>
         </a>
