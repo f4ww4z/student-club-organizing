@@ -142,3 +142,17 @@ function get_user(int $user_id): User
 
     return $user;
 }
+
+function delete_user(int $user_id): int
+{
+    $conn = get_connection();
+    $stmt = $conn->prepare("DELETE FROM user WHERE id = ?");
+    $stmt->bind_param("i", $user_id);
+
+    $is_success = $stmt->execute();
+    if (!$is_success) {
+        return -1;
+    }
+
+    return mysqli_affected_rows($conn);
+}

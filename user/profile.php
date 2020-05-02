@@ -42,7 +42,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $message = 'Successfully updated!';
         }
     }
+}
 
+// handle user delete
+if (isset($_GET['op']) and $_GET['op'] === 'delete') {
+    $affected_rows = delete_user($user_id);
+
+    if ($affected_rows <= 0) {
+        $message = 'Cannot delete your account at this time. Ensure that you are not a president of any club.';
+    } else {
+        $message = 'Successfully removed account!';
+        header("Location: /auth/logout.php");
+    }
 }
 ?>
 <div class="d-flex flex-wrap flex-justify-center container mt-5">
@@ -102,5 +113,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <button class="button success">Update</button>
     </div>
   </form>
+
+  <div class="w-100 mb-10"></div>
+  <a class="mb-5 button alert flex-self-end"
+     onclick="return confirm('Are you sure you want to delete your account?')"
+     href="profile.php?op=delete&id=<?= $user_id ?>">
+    Delete My Account
+  </a>
 </div>
 <?php include "../footer.php"; ?>
