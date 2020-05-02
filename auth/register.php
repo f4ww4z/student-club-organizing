@@ -35,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // all good, insert into db
         $user = new User(0, $post_username, $post_full_name, $post_email, $post_password, $post_contact_number, $post_address);
-        $conn = get_connection();
 
         $is_success = add_user($user);
         if ($is_success) {

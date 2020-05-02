@@ -13,7 +13,7 @@ function add_user(User $user): bool
     $password = $user->getPassword();
     $contact_number = $user->getContactNumber();
     $address = $user->getAddress();
-    $stmt->bind_param("ssssssi",
+    $stmt->bind_param("ssssss",
         $username,
         $full_name,
         $email,
@@ -23,6 +23,36 @@ function add_user(User $user): bool
     );
 
     return $stmt->execute();
+}
+
+function update_user(User $user): int
+{
+    $conn = get_connection();
+
+    $stmt = $conn->prepare("UPDATE user SET username = ?, full_name = ?, email = ?, password = ?, contact_number = ?, address = ? WHERE id = ?");
+    $id = $user->getId();
+    $username = $user->getUsername();
+    $full_name = $user->getFullName();
+    $email = $user->getEmail();
+    $password = $user->getPassword();
+    $contact_number = $user->getContactNumber();
+    $address = $user->getAddress();
+    $stmt->bind_param("ssssssi",
+        $username,
+        $full_name,
+        $email,
+        $password,
+        $contact_number,
+        $address,
+        $id,
+    );
+
+    $is_success = $stmt->execute();
+    if (!$is_success) {
+        return -1;
+    }
+
+    return mysqli_affected_rows($conn);
 }
 
 function does_username_exist($username): bool
@@ -111,4 +141,18 @@ function get_user(int $user_id): User
     }
 
     return $user;
+}
+
+function delete_user(int $user_id): int
+{
+    $conn = get_connection();
+    $stmt = $conn->prepare("DELETE FROM user WHERE id = ?");
+    $stmt->bind_param("i", $user_id);
+
+    $is_success = $stmt->execute();
+    if (!$is_success) {
+        return -1;
+    }
+
+    return mysqli_affected_rows($conn);
 }
