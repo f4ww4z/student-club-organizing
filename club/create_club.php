@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h5 class="fg-red"><?= $message ?></h5>
     <div class="form-group">
       <label for="name">Club Name</label>
-      <input id="name" name="name" type="text" placeholder="Enter club name">
+      <input id="name" name="name" type="text" placeholder="Enter club name" data-role="input">
     </div>
     <div class="form-group">
       <label for="publish_year">Year Founded</label>

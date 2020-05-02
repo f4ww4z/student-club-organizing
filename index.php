@@ -11,11 +11,11 @@ include "navbar.php";
   <div class="container">
     <h1 class="text-bold">About Us</h1>
     <style>
-      p{
-        text-align:justify;
-        font-family: SansSerif;
+      p {
+        text-align: justify;
       }
-      td{
+
+      td {
         padding: 10px;
       }
     </style>
@@ -24,19 +24,19 @@ include "navbar.php";
       clubs to create events. The origin of the idea on building our system is to help
       club representative build an event planning based on their club activity. The objective
       are as below :
-      <ol>
-        <li>
-          To analyze on events occurred in UMT created and organize by club’s person in charge.
-        </li>
-        <li>
-          To design a perfect and efficient system that enables club to create an event that
-          satisfies their exigency.
-        </li>
-        <li>
-          To implement an easy approach of organizing event that supports the clubs’
-          vision and mission.
-        </li>
-      </ol>
+    <ol>
+      <li>
+        To analyze on events occurred in UMT created and organize by club’s person in charge.
+      </li>
+      <li>
+        To design a perfect and efficient system that enables club to create an event that
+        satisfies their exigency.
+      </li>
+      <li>
+        To implement an easy approach of organizing event that supports the clubs’
+        vision and mission.
+      </li>
+    </ol>
     </p>
     <table>
       <tr>
