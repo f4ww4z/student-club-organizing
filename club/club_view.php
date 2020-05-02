@@ -28,11 +28,10 @@ $all_clubs = get_all_clubs();
       <?php endforeach; ?>
   </div>
 
-  <div class="d-flex flex-justify-between w-100 mt-4">
-    <a class="button fg-white bg-lightIndigo bg-indigo-hover text-bold"
-       href="/club/create_club.php">
-      TODO
-    </a>
+  <div class="d-flex flex-justify-end w-100 mt-4">
+<!--    <a class="button fg-white bg-lightIndigo bg-indigo-hover text-bold"-->
+<!--       href="/club/create_club.php">-->
+<!--    </a>-->
     <a class="button fg-white bg-lightIndigo bg-indigo-hover text-bold"
        href="/club/create_club.php">
       Create New Club
@@ -40,7 +39,9 @@ $all_clubs = get_all_clubs();
   </div>
 
   <h1 class="w-100 text-bold">All Clubs</h1>
-  <table class="w-100 table striped" data-role="table" data-horizontal-scroll="true">
+  <table class="w-100 table striped"
+         data-role="table"
+         data-horizontal-scroll="true">
     <thead>
     <tr>
       <th class="sortable-column" data-sortable="true" data-format="int" data-sort-dir="asc">Code</th>

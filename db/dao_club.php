@@ -180,3 +180,18 @@ function update_club(Club $club): int
 
     return mysqli_affected_rows($conn);
 }
+
+
+function delete_club(int $club_id): int
+{
+    $conn = get_connection();
+    $stmt = $conn->prepare("DELETE FROM club WHERE id = ?");
+    $stmt->bind_param("i", $club_id);
+
+    $is_success = $stmt->execute();
+    if (!$is_success) {
+        return -1;
+    }
+
+    return mysqli_affected_rows($conn);
+}

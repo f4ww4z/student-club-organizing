@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($post_club_name) or
         empty($post_published_year) or
         empty($post_president_id)) {
-        $message = 'Please fill allfields!';
+        $message = 'Please fill all fields!';
     } else {
         // all good, update club
         $club = new Club($club_id, $post_club_name, $post_published_year, $post_president_id);
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 ?>
-<div class="container">
+<div class="container mt-10">
   <div style="background-color: #d7c7ff" class="d-flex flex-wrap p-10 tile">
 
     <h1 class="w-100 text-bold">Editing <span class="fg-darkIndigo"><?= $club->getName() ?></span></h1>
@@ -63,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input id="year_founded"
                name="year_founded"
                type="number"
-               data-role="input"
                placeholder="Enter year founded"
                value="<?= $club->getPublishYear() ?>"/>
       </div>
