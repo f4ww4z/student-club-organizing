@@ -83,6 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="button" class="button" value="Cancel">
       </div>
     </form>
+
+    <p>Already have an account? <a href="/auth/login.php">Log in instead</a>.</p>
+
   </div>
 </div>
 <?php include "../footer.php"; ?>

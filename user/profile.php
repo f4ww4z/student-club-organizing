@@ -28,7 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (does_username_exist($post_username) and $post_username !== $username) {
         $message = 'Username already exists';
     } else {
-        // all good, update db
+        // all good, update db and session
+        $_SESSION['username'] = $post_username;
+
         $user->setUsername($post_username);
         $user->setFullName($post_full_name);
         $user->setEmail($post_email);

@@ -49,6 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="button" class="button" value="Cancel">
       </div>
     </form>
+
+    <p>Don't have an account? <a href="/auth/register.php">Register now</a>. It's 100% free.</p>
   </div>
 </div>
 <?php include "../footer.php"; ?>
