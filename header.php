@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="/main.css">
   <title><?= "$pageTitle | Student Club Organizer" ?></title>
 </head>
-<body class="<?= isset($bodyClass) ? $bodyClass : '' ?> pt-12">
+<body class="<?= isset($bodyClass) ? $bodyClass : '' ?> pt-12 pb-12">
 <?php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();

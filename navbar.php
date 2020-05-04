@@ -36,7 +36,7 @@ if ($is_authenticated) {
       </a>
     </button>
     <button class="button">
-      <a class="no-decor fg-black fg-indigo-hover" href="/club/club_view.php">
+      <a class="no-decor fg-black fg-indigo-hover" href="/event/event_view.php">
         <span class="icon mif-event-available"></span>
         <span class="label">Events</span>
       </a>
