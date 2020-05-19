@@ -10,6 +10,7 @@ $id = $_GET['id'];
 $event = get_event($id);
 $club_of_event = get_club($event->getClubId());
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $post_name = $_POST['name'];
     $post_desc = $_POST['des'];
@@ -53,7 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </table>
         <div class="d-flex flex-justify-between w-100 mt-4">
           <a class="button" href="/event/event_view.php">Go Back</a>
-          <button type="submit" class="button success">Update</button>
+           if(<?= $event-> getCan_edit() ?> == "allowed"){
+             <button type="submit" class="button success">Update</button>
+            }
+     
         </div>
       </form>
     </div>
