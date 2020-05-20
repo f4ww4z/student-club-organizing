@@ -53,10 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </table>
         <div class="d-flex flex-justify-between w-100 mt-4">
           <a class="button" href="/event/event_view.php">Go Back</a>
+            <?php if($event->can_Edit() == "false"){ ?>
           <button type="submit" class="button success">Update</button>
+            <?php } ?>
         </div>
       </form>
     </div>
-
   </div>
 <?php include "../footer.php"; ?>
