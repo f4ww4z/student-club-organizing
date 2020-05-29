@@ -24,3 +24,7 @@
     border-radius: 14px;
     filter: drop-shadow(2px 2px 3px #a7a7a7);
 }
+
+.calendar-icon {
+    height: 24px;
+}

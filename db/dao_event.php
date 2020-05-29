@@ -13,14 +13,22 @@ function add_event(Event $event): int
     $club_id = $event->getClubId();
     $name = $event->getName();
     $description = $event->getDescription();
+    $start_date = $event->getStartDate();
+    $end_date = $event->getEndDate();
+    $uniform = $event->getUniform();
+    $notes = $event->getNotes();
 
     $conn = get_connection();
-    $stmt = $conn->prepare("INSERT INTO event (name, description, club_id)
-                            VALUES (?, ?, ?)");
-    $stmt->bind_param("ssi",
+    $stmt = $conn->prepare("INSERT INTO event (club_id, name, description, start_date, end_date, uniform, notes)
+                            VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("issssss",
+        $club_id,
         $name,
         $description,
-        $club_id);
+        $start_date,
+        $end_date,
+        $uniform,
+        $notes);
 
     $is_success = $stmt->execute();
     if (!$is_success) {
@@ -36,13 +44,21 @@ function update_event(Event $event): int
     $club_id = $event->getClubId();
     $name = $event->getName();
     $description = $event->getDescription();
+    $start_date = $event->getStartDate();
+    $end_date = $event->getEndDate();
+    $uniform = $event->getUniform();
+    $notes = $event->getNotes();
 
     $conn = get_connection();
-    $stmt = $conn->prepare("UPDATE event SET club_id=?, name=?, description=? where id=?");
-    $stmt->bind_param("issi",
+    $stmt = $conn->prepare("UPDATE event SET club_id=?, name=?, description=?, start_date=?, end_date=?, uniform=?, notes=? where id=?");
+    $stmt->bind_param("issssssi",
         $club_id,
         $name,
         $description,
+        $start_date,
+        $end_date,
+        $uniform,
+        $notes,
         $id);
 
     $is_success = $stmt->execute();
@@ -55,8 +71,6 @@ function update_event(Event $event): int
 
 function delete_event(int $id): int
 {
-
-
     $conn = get_connection();
     $stmt = $conn->prepare("DELETE from event WHERE id= $id");
     $stmt->bind_param("i",
@@ -105,28 +119,35 @@ function delete_event(int $id): int
 //    return $events;
 //}
 
-function get_event(int $event_id): Event
+function get_event(int $event_id): ?Event
 {
     $conn = get_connection();
 
-    $event = new Event($event_id, 0, '', '');
-
     $stmt = $conn->prepare(
-        "SELECT club_id, name, description FROM event WHERE id = ?"
+        "SELECT * FROM event WHERE id = ?"
     );
     $stmt->bind_param("i", $event_id);
 
     $is_success = $stmt->execute();
     if (!$is_success) {
-        return $event;
+        return null;
     }
 
     $result = $stmt->get_result();
 
+    $event = null;
+
     if ($row = $result->fetch_assoc()) {
-        $event->setClubId($row['club_id']);
-        $event->setName($row['name']);
-        $event->setDescription($row['description']);
+        $event = new Event(
+            $event_id,
+            $row['club_id'],
+            $row['name'],
+            $row['description'],
+            $row['start_date'],
+            $row['end_date'],
+            $row['uniform'],
+            $row['notes']
+        );
     }
 
     return $event;
