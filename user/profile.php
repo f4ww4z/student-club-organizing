@@ -112,7 +112,7 @@ if (isset($_GET['op']) and $_GET['op'] === 'delete') {
     </div>
     <div class="d-flex flex-justify-between form-group mt-5">
       <input type="reset" class="button" value="Reset">
-      <button class="button success">Update</button>
+      <button class="button success">Edit</button>
     </div>
   </form>
 

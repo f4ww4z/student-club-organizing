@@ -3,6 +3,36 @@ require_once "mysql.php";
 include_once "../model/event_participation.php";
 include_once "../model/event.php";
 
+function get_event_participation(int $user_id, int $event_id): ?EventParticipation
+{
+    $conn = get_connection();
+
+    $stmt = $conn->prepare(
+        "SELECT * FROM event_participation WHERE user_id = ? AND event_id = ?"
+    );
+    $stmt->bind_param("ii", $user_id, $event_id);
+
+    $is_success = $stmt->execute();
+    if (!$is_success) {
+        return null;
+    }
+
+    $result = $stmt->get_result();
+
+    $event_participation = null;
+
+    if ($row = $result->fetch_assoc()) {
+        $event_participation = new EventParticipation(
+            $row['id'],
+            $user_id,
+            $event_id,
+            $row['can_edit']
+        );
+    }
+
+    return $event_participation;
+}
+
 function get_all_events_of_participant(int $user_id): array
 {
     $event_parts_with_detail = array();
@@ -26,7 +56,11 @@ function get_all_events_of_participant(int $user_id): array
             $row['event_id'],
             $row['club_id'],
             $row['event_name'],
-            $row['event_desc']
+            $row['event_desc'],
+            '',
+            '',
+            '',
+            ''
         );
 
         $event_part = new EventParticipation(

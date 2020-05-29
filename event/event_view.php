@@ -27,8 +27,8 @@ $event_parts_with_detail = get_all_events_of_participant($user_id);
                 <p>&nbsp;</p>
                 <div class="d-flex flex-justify-end">
                   <a class="button mr-2 bg-indigo bg-darkIndigo-hover fg-white"
-                     href="/event/update_event.php?id=<?= $ep->getEvent()->getId() ?>">
-                    Update
+                     href="/event/event_detail.php?id=<?= $ep->getEvent()->getId() ?>">
+                    View
                   </a>
                   <a class="button"
                      onclick="return confirm('Are you sure you want to delete this event and everyone that joined?')"
