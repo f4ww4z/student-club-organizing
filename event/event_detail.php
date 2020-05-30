@@ -10,6 +10,7 @@ $event_id = $_GET['id'];
 $user_id = get_user_id_from_username($_SESSION['username']);
 $event = get_event($event_id);
 $event_participation = get_event_participation($user_id, $event_id);
+$participants = get_all_participants($event_id);
 ?>
 <div class="container">
   <div class="mt-10 bg-light p-10">
@@ -42,6 +43,30 @@ $event_participation = get_event_participation($user_id, $event_id);
         <h4 class="text-bold">Additional Notes</h4>
         <h6><?= $event->getNotes() ?></h6>
       </div>
+    </div>
+    <div class="row">
+      <h5 class="text-bold">Participants:</h5>
+        <?php if (sizeof($participants) <= 0) : ?>
+          <h6>No participants yet.</h6>
+        <?php else : ?>
+          <table class="table row-border table-border">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Full Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($participants as $index => $participant) : ?>
+              <tr>
+                <td><?= $index + 1 ?></td>
+                <td><?= $participant ?></td>
+              </tr>
+            <?php endforeach; ?>
+            </tbody>
+          </table>
+        <?php endif; ?>
+      <table></table>
     </div>
     <div class="row">
       <a class="button secondary" href="event_view.php">Go Back</a>
