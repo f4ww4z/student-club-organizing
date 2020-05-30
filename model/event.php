@@ -163,3 +163,109 @@ class Event
         $this->notes = $notes;
     }
 }
+
+class BriefEvent
+{
+    private int $id;
+    private int $club_id;
+    private string $event_name;
+    private string $event_desc;
+    private string $club_name;
+
+    /**
+     * BriefEvent constructor.
+     * @param int $id
+     * @param int $club_id
+     * @param string $event_name
+     * @param string $event_desc
+     * @param string $club_name
+     */
+    public function __construct(int $id, int $club_id, string $event_name, string $event_desc, string $club_name)
+    {
+        $this->id = $id;
+        $this->club_id = $club_id;
+        $this->event_name = $event_name;
+        $this->event_desc = $event_desc;
+        $this->club_name = $club_name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getClubId(): int
+    {
+        return $this->club_id;
+    }
+
+    /**
+     * @param int $club_id
+     */
+    public function setClubId(int $club_id): void
+    {
+        $this->club_id = $club_id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEventName(): string
+    {
+        return $this->event_name;
+    }
+
+    /**
+     * @param string $event_name
+     */
+    public function setEventName(string $event_name): void
+    {
+        $this->event_name = $event_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEventDesc(): string
+    {
+        return $this->event_desc;
+    }
+
+    /**
+     * @param string $event_desc
+     */
+    public function setEventDesc(string $event_desc): void
+    {
+        $this->event_desc = $event_desc;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClubName(): string
+    {
+        return $this->club_name;
+    }
+
+    /**
+     * @param string $club_name
+     */
+    public function setClubName(string $club_name): void
+    {
+        $this->club_name = $club_name;
+    }
+}
