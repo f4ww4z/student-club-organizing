@@ -82,6 +82,19 @@ function add_user_to_club(string $username, int $club_id, bool $can_edit = true)
     return $stmt->execute();
 }
 
+function remove_user_from_club(string $username, int $club_id): bool
+{
+    $conn = get_connection();
+
+    $user_id = get_user_id_from_username($username);
+
+    $stmt = $conn->prepare("DELETE FROM club_members WHERE user_id = ? AND club_id = ?");
+
+    $stmt->bind_param("ii", $user_id, $club_id);
+
+    return $stmt->execute();
+}
+
 function get_club(int $club_id): Club
 {
     $conn = get_connection();
@@ -142,6 +155,18 @@ function can_edit_club(int $user_id, int $club_id): bool
     $can_edit = false;
 
     $conn = get_connection();
+
+    // enable the president to be able to edit the club
+    $club = get_club($club_id);
+    if ($user_id === $club->getPresidentId()) {
+        $stmt = $conn->prepare("UPDATE club_members SET can_edit = TRUE WHERE user_id = ? AND club_id = ?");
+        $stmt->bind_param("ii", $user_id, $club_id);
+
+        $stmt->execute();
+
+        return true;
+    }
+
     $stmt = $conn->prepare("SELECT can_edit FROM club_members WHERE user_id = ? AND club_id = ?");
     $stmt->bind_param("ii", $user_id, $club_id);
     $is_success = $stmt->execute();
@@ -165,6 +190,7 @@ function update_club(Club $club): int
     $president_id = $club->getPresidentId();
 
     $conn = get_connection();
+
     $stmt = $conn->prepare("UPDATE club SET name = ?, publish_year = ?, president_id = ?
                             WHERE id = ?");
     $stmt->bind_param("siii",

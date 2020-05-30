@@ -78,8 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
       </div>
       <div class="form-group mt-10">
-        <button class="button success">Update</button>
-        <input type="reset" class="button" value="Reset">
+        <a class="button secondary" href="club_detail.php?id=<?= $club_id ?>">Go Back</a>
+        <button class="ml-1 button success">Update</button>
       </div>
     </form>
   </div>

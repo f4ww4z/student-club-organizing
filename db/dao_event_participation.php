@@ -144,3 +144,29 @@ function remove_event_participation($user_id, $event_id): bool
 
     return $stmt->execute();
 }
+
+function get_all_participants($event_id): array
+{
+    $participants = array();
+
+    $conn = get_connection();
+    $stmt = $conn->prepare("
+        SELECT u.full_name
+        FROM event_participation
+        INNER JOIN user u on event_participation.user_id = u.id
+        WHERE event_id = ?;
+    ");
+    $stmt->bind_param("i", $event_id);
+
+    $is_success = $stmt->execute();
+    if (!$is_success) {
+        return $participants;
+    }
+
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        array_push($participants, $row['full_name']);
+    }
+
+    return $participants;
+}

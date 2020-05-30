@@ -26,6 +26,15 @@ if (isset($_GET['op'])) {
         } else {
             header('Location: club_view.php');
         }
+    } elseif ($operation === 'leave') {
+        $is_success = remove_user_from_club($username, $club_id);
+
+        if ($is_success) {
+            $_SESSION['message'] = 'Successfully left the club!';
+            header('Location: club_view.php');
+        } else {
+            $message = 'Cannot leave club at this time.';
+        }
     }
 }
 
@@ -40,18 +49,22 @@ if (isset($_GET['op'])) {
 
     <h3 class="w-100">President: <b><?= $president->getFullName() ?></b> (<?= $president->getUsername() ?>)</h3>
     <h3 class="w-100">Year founded: <b><?= $club->getPublishYear() ?></b></h3>
-
-    <a class="mt-2 button bg-red bg-darkRed-hover fg-white" href="edit_club.php?id=<?= $club_id ?>">
-      <b>Edit</b>
-    </a>
-    <a href="club_detail.php?id=<?= $club_id ?>&op=delete"
-       class="ml-2 mt-2 button bg-gray bg-darkRed-hover fg-white"
-       onclick="return confirm('Are you sure you want to delete <?= $club->getName() ?> and ALL its events?')">
-      <b>Delete</b>
+      <?php if ($user_can_edit) : ?>
+        <a class="mt-2 button bg-red bg-darkRed-hover fg-white" href="edit_club.php?id=<?= $club_id ?>">
+          <b>Edit</b>
+        </a>
+        <a href="club_detail.php?id=<?= $club_id ?>&op=delete"
+           class="ml-2 mt-2 button bg-gray bg-darkRed-hover fg-white"
+           onclick="return confirm('Are you sure you want to delete <?= $club->getName() ?> and ALL its events?')">
+          <b>Delete</b>
+        </a>
+      <?php endif; ?>
+    <a href="club_detail.php?id=<?= $club_id ?>&op=leave"
+       class="ml-2 mt-2 button primary fg-white"
+       onclick="return confirm('Are you sure you want to leave club <?= $club->getName() ?>?')">
+      <b>Leave</b>
     </a>
   </div>
-
-  <!--  TODO: View all events of this club -->
 </div>
 
 <?php include "../footer.php"; ?>

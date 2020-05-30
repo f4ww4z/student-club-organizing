@@ -29,9 +29,6 @@ $all_clubs = get_all_clubs();
   </div>
 
   <div class="d-flex flex-justify-end w-100 mt-4">
-<!--    <a class="button fg-white bg-lightIndigo bg-indigo-hover text-bold"-->
-<!--       href="/club/create_club.php">-->
-<!--    </a>-->
     <a class="button fg-white bg-lightIndigo bg-indigo-hover text-bold"
        href="/club/create_club.php">
       Create New Club
@@ -44,11 +41,11 @@ $all_clubs = get_all_clubs();
          data-horizontal-scroll="true">
     <thead>
     <tr>
-      <th class="sortable-column" data-sortable="true" data-format="int" data-sort-dir="asc">Code</th>
+      <th class="sortable-column" data-sortable="true" data-format="int">Code</th>
       <th class="sortable-column" data-sortable="true">Club Name</th>
       <th class="sortable-column" data-sortable="true" data-format="int">Year Founded</th>
       <th class="sortable-column" data-sortable="true">President</th>
-      <th></th>
+      <th class="sortable-column" data-sortable="true" data-sort-dir="asc"></th>
     </tr>
     </thead>
     <tbody>
