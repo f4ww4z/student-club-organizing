@@ -80,6 +80,43 @@ function get_all_events_of_participant(int $user_id): array
     return $event_parts_with_detail;
 }
 
+
+function get_all_events_not_joined_by_participant(int $user_id): array
+{
+    $conn = get_connection();
+    $stmt = $conn->prepare("
+        SELECT e.id as event_id, e.club_id as club_id, e.name as event_name, c.name as club_name, description as event_desc
+        FROM event e
+        INNER JOIN club c on e.club_id = c.id
+        WHERE e.id NOT IN (SELECT ep.event_id
+                   FROM event_participation ep
+                   WHERE ep.user_id = ?)"
+    );
+    $stmt->bind_param("i", $user_id);
+
+    $is_success = $stmt->execute();
+    if (!$is_success) {
+        return array();
+    }
+
+    $events_not_joined = array();
+
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $event = new BriefEvent(
+            $row['event_id'],
+            $row['club_id'],
+            $row['event_name'],
+            $row['event_desc'],
+            $row['club_name']
+        );
+
+        array_push($events_not_joined, $event);
+    }
+
+    return $events_not_joined;
+}
+
 function add_event_participation(EventParticipation $ep): int
 {
     $conn = get_connection();
@@ -96,4 +133,14 @@ function add_event_participation(EventParticipation $ep): int
     }
 
     return mysqli_insert_id($conn);
+}
+
+function remove_event_participation($user_id, $event_id): bool
+{
+    $conn = get_connection();
+
+    $stmt = $conn->prepare("DELETE FROM event_participation WHERE user_id = ? AND event_id = ?");
+    $stmt->bind_param("ii", $user_id, $event_id);
+
+    return $stmt->execute();
 }

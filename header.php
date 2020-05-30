@@ -29,4 +29,10 @@ if (!in_array($pageTitle, $unauthenticated_page_titles) and !$is_authenticated) 
     header("Location: /auth/logout.php");
 }
 ?>
-
+<!--Show any message stored in session and destroys it immediately afterwards -->
+<?php if (isset($_SESSION['message'])) : ?>
+  <script type="application/javascript">
+      alert("<?=$_SESSION['message'] ?>");
+  </script>
+    <?php unset($_SESSION['message']); ?>
+<?php endif; ?>

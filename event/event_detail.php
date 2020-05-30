@@ -45,8 +45,29 @@ $event_participation = get_event_participation($user_id, $event_id);
     </div>
     <div class="row">
       <a class="button secondary" href="event_view.php">Go Back</a>
-        <?php if ($event_participation->canEdit()) : ?>
-          <a class="button primary ml-3" href="update_event.php?id=<?= $event_id ?>">Edit</a>
+        <?php if (is_null($event_participation)) : ?>
+          <a class="ml-2 button primary"
+             onclick="return confirm('Are you sure you want to join this event?')"
+             href="/event/join_event.php?id=<?= $event->getId() ?>">
+            Join
+          </a>
+        <?php else : ?>
+          <a class="ml-2 button primary"
+             onclick="return confirm('Are you sure you want to leave this event?')"
+             href="/event/leave_event.php?id=<?= $event->getId() ?>">
+            Leave Event
+          </a>
+            <?php if ($event_participation->canEdit()) : ?>
+            <a class="button primary ml-3"
+               href="update_event.php?id=<?= $event_id ?>">
+              Edit
+            </a>
+            <a class="button alert"
+               onclick="return confirm('Are you sure you want to delete this event and everyone that joined?')"
+               href="/event/delete_event.php?id=<?= $event_id ?>">
+              Delete
+            </a>
+            <?php endif; ?>
         <?php endif; ?>
     </div>
   </div>
