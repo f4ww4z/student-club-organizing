@@ -7,6 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
   <link rel="stylesheet" href="/main.css">
+  <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
   <title><?= "$pageTitle | Student Club Organizer" ?></title>
 </head>
 <body class="<?= isset($bodyClass) ? $bodyClass : '' ?> pt-12 pb-12">
