@@ -42,4 +42,8 @@
     .button {
         display: none;
     }
+
+    .hide-printing {
+        display: none;
+    }
 }
