@@ -69,6 +69,9 @@ $participants = get_all_participants($event_id);
       <table></table>
     </div>
     <div class="row">
+      <a class="button mb-2" onclick="window.print()">Save as PDF</a>
+    </div>
+    <div class="row">
       <a class="button secondary" href="event_view.php">Go Back</a>
         <?php if (is_null($event_participation)) : ?>
           <a class="ml-2 button primary"
