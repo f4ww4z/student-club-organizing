@@ -15,6 +15,8 @@ $club = get_club($club_id);
 
 $president = get_user($club->getPresidentId());
 
+$club_members = get_club_members($club_id);
+
 $message = '';
 // handle club delete
 if (isset($_GET['op'])) {
@@ -49,6 +51,30 @@ if (isset($_GET['op'])) {
 
     <h3 class="w-100">President: <b><?= $president->getFullName() ?></b> (<?= $president->getUsername() ?>)</h3>
     <h3 class="w-100">Year founded: <b><?= $club->getPublishYear() ?></b></h3>
+    <h3 class="w-100">Club members:</h3>
+      <?php if (sizeof($club_members) <= 0) : ?>
+        <h6>No club members yet.</h6>
+      <?php else : ?>
+        <table class="w-100 bg-light table row-border table-border">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Full Name</th>
+          </tr>
+          </thead>
+          <tbody>
+          <?php foreach ($club_members as $index => $full_name) : ?>
+            <tr>
+              <td><?= $index + 1 ?></td>
+              <td><?= $full_name ?></td>
+            </tr>
+          <?php endforeach; ?>
+          </tbody>
+        </table>
+      <?php endif; ?>
+    <div class="w-100"></div>
+    <a class="button mb-2" onclick="window.print()">Save as PDF</a>
+    <div class="w-100"></div>
       <?php if ($user_can_edit) : ?>
         <a class="mt-2 button bg-red bg-darkRed-hover fg-white" href="edit_club.php?id=<?= $club_id ?>">
           <b>Edit</b>

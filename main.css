@@ -28,3 +28,18 @@
 .calendar-icon {
     height: 24px;
 }
+
+/* Set options when exporting page as PDF */
+@media print {
+    .app-bar {
+        display: none;
+    }
+
+    .bottom-nav {
+        display: none;
+    }
+
+    .button {
+        display: none;
+    }
+}

@@ -150,6 +150,32 @@ function get_all_clubs(): array
     return $clubs;
 }
 
+function get_club_members(int $club_id): array
+{
+    $club_members = array();
+
+    $conn = get_connection();
+    $stmt = $conn->prepare("
+        SELECT u.full_name
+        FROM club_members
+        INNER JOIN user u on club_members.user_id = u.id
+        WHERE club_id = ?;
+    ");
+    $stmt->bind_param("i", $club_id);
+
+    $is_success = $stmt->execute();
+    if (!$is_success) {
+        return $club_members;
+    }
+
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        array_push($club_members, $row['full_name']);
+    }
+
+    return $club_members;
+}
+
 function can_edit_club(int $user_id, int $club_id): bool
 {
     $can_edit = false;
